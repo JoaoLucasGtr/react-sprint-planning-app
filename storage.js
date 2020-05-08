@@ -15,7 +15,7 @@ class Storage {
     let json = JSON.stringify(this.projetos);
     localStorage.setItem(this.key, json);
   }
-  
+
   getProjeto(nome) {
     return this.projetos.find(p => p.nome === nome);
   }
@@ -33,8 +33,13 @@ class Storage {
   addTarefa({ projetoNome, descricao, pontos }) {
     let tarefas = this.getTarefas(projetoNome);
     let id = tarefas.length + 1;
-    tarefas.push({ id, descricao, pontos });
+    tarefas.push({ id, descricao, pontos: pontos || 0 });
     this.save();
+  }
+
+  calcularPontuacao(projetoNome) {
+    let tarefas = this.getTarefas(projetoNome);
+    return tarefas.reduce((prev, curr) => prev + curr.pontos, 0);
   }
 }
 

@@ -1,25 +1,20 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import data from './storage.js'
+import data from "./storage.js";
 
 export default class Projeto extends Component {
   constructor({ nome }) {
-    super();    
-    let projeto = data.getProjeto(nome);
-    let tarefas = projeto.tarefas;    
+    super();
+    let tarefas = data.getTarefas(nome);
     this.state = {
-      projeto,
+      projetoNome: nome,
       nome,
       tarefas,
-      pontuacao: this.calcularPontuacao(tarefas),
+      pontuacao: data.calcularPontuacao(nome),
       input: "",
       pontosInput: ""
     };
   }
-
-  calcularPontuacao = (tarefas) => {
-    return tarefas.reduce((prev, curr) => prev + curr.pontos, 0);
-  };
 
   textChanged = e => {
     this.setState({ input: e.target.value });
@@ -31,15 +26,15 @@ export default class Projeto extends Component {
   };
 
   add = () => {
-    let projetoNome = this.state.projeto.nome;
+    let projetoNome = this.state.projetoNome;
     data.addTarefa({
       projetoNome,
       descricao: this.state.input,
       pontos: this.state.pontosInput
     });
-    
+
     let tarefas = data.getTarefas(projetoNome);
-    let pontuacao = this.calcularPontuacao(tarefas);
+    let pontuacao = data.calcularPontuacao(projetoNome);
     this.setState({ tarefas, pontuacao, input: "", pontosInput: "" });
   };
 
@@ -48,7 +43,8 @@ export default class Projeto extends Component {
       <div className="proj">
         <h2>Projeto: {this.state.nome}</h2>
         <p>
-          Atividades: {this.state.tarefas.length}, Pontuação: {this.state.pontuacao}
+          Atividades: {this.state.tarefas.length}, Pontuação:{" "}
+          {this.state.pontuacao}
         </p>
         <input
           placeholder="Tarefa"
