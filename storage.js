@@ -4,7 +4,7 @@ class Storage {
 
   constructor() {
     let json = localStorage.getItem(this.key);
-    this._projetos = JSON.parse(json);
+    this._projetos = json ? JSON.parse(json) : [];
   }
 
   get projetos() {

@@ -27,7 +27,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <p>Projetos: {this.state.projetos.length}</p>
+        <div>
+          Projetos: {this.state.projetos.length}, Pontuação Total: 0
+        </div>
         <input
           placeholder="incluir projeto"
           value={this.state.input}
