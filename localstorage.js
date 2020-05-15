@@ -11,6 +11,11 @@ class LocalStorage {
     return this._projects;
   }
 
+  clear() {
+    this._projects = [];
+    this.save();
+  }
+
   save() {
     let json = JSON.stringify(this.projects);
     localStorage.setItem(this.key, json);
@@ -21,8 +26,11 @@ class LocalStorage {
   }
 
   addProject(name) {
-    let id = this.projects.length + 1;
-    this.projects.push({ id, name, tasks: [] });
+    let maxId = this.projects.length > 0
+      ? this.projects.reduce((prev, current) => (prev.id > current.id) ? prev : current)
+      : { id: 0 };
+
+    this.projects.push({ id: maxId.id + 1, name, tasks: [] });
     this.save();
   }
 
@@ -33,8 +41,8 @@ class LocalStorage {
 
   addTask({ projectId, description, points }) {
     let tasks = this.getTasks(projectId);
-    let id = tasks.length + 1;
-    tasks.push({ id, description, points: parseInt(points) || 0 });
+    let maxId = tasks.length > 0 ? tasks.reduce((prev, current) => (prev.id > current.id) ? prev : current) : { id: 0 };
+    tasks.push({ id: maxId.id + 1, description, points: parseInt(points) || 0 });
     this.save();
   }
 
@@ -48,6 +56,13 @@ class LocalStorage {
     let tasks = this.getTasks(projectId);
     let taskIndex = tasks.findIndex(t => t.id === taskId);
     tasks.splice(taskIndex, 1);
+    this.save();
+  }
+
+  updateTaskPoints(projectId, taskId, points) {
+    let tasks = this.getTasks(projectId);
+    let task = tasks.find(t => t.id === taskId);
+    task.points = points;
     this.save();
   }
 
