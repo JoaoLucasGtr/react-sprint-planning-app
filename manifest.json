@@ -6,7 +6,6 @@
   "background_color": "#2196f3",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/sprint-planning-app",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
