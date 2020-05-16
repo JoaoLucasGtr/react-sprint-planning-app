@@ -4,8 +4,10 @@ const staticAssets = [
   './index.html',
   './index.js',
   './localstorage.js',
-  './sprint_planning_app_icon.png',
-  './sprint_planning_app_icon.svg',
+  './icons/sprint_planning_app_icon.png',
+  './icons/sprint_planning_app_icon-144.png',
+  './icons/sprint_planning_app_icon-100.png',
+  './icons/sprint_planning_app_icon.svg',
 ];
 
 self.addEventListener('install', async e => {
