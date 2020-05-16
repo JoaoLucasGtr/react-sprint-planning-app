@@ -6,6 +6,7 @@
   "background_color": "#2196f3",
   "display": "standalone",
   "scope": "/",
+  "start_url": "",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
@@ -36,7 +37,12 @@
       "src": "icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
-  "splash_pages": null
+  "splash_pages": "icons/icon-512x512.png"
 }
