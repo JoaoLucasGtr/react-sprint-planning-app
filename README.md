@@ -26,6 +26,7 @@ Enjoy yourself.
 
 ## Features
 
+- Install as a Desktop App;
 - Create and delete a project;
 - Add and remove tasks to a project;
 - Set story points for a task;
